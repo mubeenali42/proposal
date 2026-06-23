@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Marry Me ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e7,#fff0f5);
+    position:relative;
+}
+
+/* Floating Hearts */
+.hearts{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:0;
+}
+
+.hearts span{
+    position:absolute;
+    bottom:-100px;
+    color:#ff4d88;
+    font-size:20px;
+    animation:float 12s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    width:90%;
+    max-width:700px;
+    text-align:center;
+    padding:30px;
+}
+
+.heart-main{
+    font-size:80px;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+    50%{
+        transform:scale(1.15);
+    }
+}
+
+h1{
+    font-size:clamp(40px,8vw,75px);
+    color:#ff2d75;
+    margin-top:10px;
+}
+
+h2{
+    font-size:clamp(24px,5vw,45px);
+    color:#ff4d88;
+    margin-top:10px;
+}
+
+.line{
+    margin:25px auto;
+    width:120px;
+    height:4px;
+    background:#ff4d88;
+    border-radius:50px;
+}
+
+.buttons{
+    position:relative;
+    width:100%;
+    height:250px;
+    margin-top:30px;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    border-radius:50px;
+    font-size:20px;
+    padding:15px 35px;
+    transition:.3s;
+}
+
+#yesBtn{
+    background:#ff2d75;
+    color:white;
+    box-shadow:0 8px 25px rgba(255,45,117,.35);
+}
+
+#yesBtn:hover{
+    transform:scale(1.08);
+}
+
+#noBtn{
+    position:absolute;
+    left:65%;
+    top:0;
+    background:white;
+    border:2px solid #ff2d75;
+    color:#333;
+}
+
+.success{
+    display:none;
+    margin-top:30px;
+    animation:pop .8s ease;
+}
+
+.success h3{
+    color:#ff2d75;
+    font-size:clamp(28px,5vw,50px);
+}
+
+.success p{
+    margin-top:10px;
+    color:#555;
+    font-size:18px;
+}
+
+@keyframes pop{
+    from{
+        opacity:0;
+        transform:scale(.4);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.love{
+    position:fixed;
+    font-size:30px;
+    pointer-events:none;
+    animation:loveUp 4s linear forwards;
+}
+
+@keyframes loveUp{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-500px);
+        opacity:0;
+    }
+}
+
+@media(max-width:768px){
+
+    .heart-main{
+        font-size:65px;
+    }
+
+    button{
+        font-size:18px;
+        padding:14px 28px;
+    }
+
+    .buttons{
+        height:300px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="hearts" id="bgHearts"></div>
+
+<div class="container">
+
+    <div class="heart-main">❤️</div>
+
+    <h1>I LOVE U</h1>
+
+    <h2>Will You Marry Me?</h2>
+
+    <div class="line"></div>
+
+    <div class="buttons">
+
+        <button id="yesBtn">YES ❤️</button>
+
+        <button id="noBtn">NO 😜</button>
+
+    </div>
+
+    <div class="success" id="success">
+        <h3>❤️ Thank You ❤️</h3>
+        <p>For saying YES to forever with me.</p>
+        <p>You made me the happiest person alive.</p>
+    </div>
+
+</div>
+
+<script>
+
+// Background Hearts
+const heartsContainer = document.getElementById("bgHearts");
+
+for(let i=0;i<30;i++){
+
+    const heart = document.createElement("span");
+
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random()*100+"%";
+    heart.style.fontSize = (15+Math.random()*25)+"px";
+    heart.style.animationDuration = (6+Math.random()*8)+"s";
+    heart.style.animationDelay = Math.random()*5+"s";
+
+    heartsContainer.appendChild(heart);
+}
+
+// NO Button Escape
+const noBtn = document.getElementById("noBtn");
+
+function moveNoButton(){
+
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const maxX = window.innerWidth - btnWidth - 20;
+    const maxY = window.innerHeight - btnHeight - 20;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
+
+// YES Button
+document.getElementById("yesBtn").addEventListener("click", ()=>{
+
+    document.getElementById("success").style.display="block";
+
+    for(let i=0;i<80;i++){
+
+        const love = document.createElement("div");
+
+        love.className="love";
+        love.innerHTML="❤️";
+
+        love.style.left=Math.random()*window.innerWidth+"px";
+        love.style.top=(window.innerHeight-50)+"px";
+        love.style.fontSize=(20+Math.random()*35)+"px";
+
+        document.body.appendChild(love);
+
+        setTimeout(()=>{
+            love.remove();
+        },4000);
+    }
+
+});
+</script>
+
+</body>
+</html>
