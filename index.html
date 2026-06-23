@@ -15,12 +15,14 @@
 
 body{
     min-height:100vh;
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
     background:linear-gradient(135deg,#ffd6e7,#fff0f5);
     position:relative;
+    padding:20px 0;
 }
 
 /* Floating Hearts */
@@ -94,8 +96,8 @@ h2{
 .buttons{
     position:relative;
     width:100%;
-    height:250px;
     margin-top:30px;
+    min-height:120px;
 }
 
 button{
@@ -183,9 +185,7 @@ button{
         padding:14px 28px;
     }
 
-    .buttons{
-        height:300px;
-    }
+
 }
 </style>
 </head>
